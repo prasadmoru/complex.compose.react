@@ -3,23 +3,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t stephengrider/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t prasad890/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run stephengrider/react-test npm test -- --coverage
+  - docker run prasad890/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t stephengrider/multi-client ./client
-  - docker build -t stephengrider/multi-nginx ./nginx
-  - docker build -t stephengrider/multi-server ./server
-  - docker build -t stephengrider/multi-worker ./worker
+  - docker build -t prasad890/multi_client ./client
+  - docker build -t prasad890/multi_nginx ./nginx
+  - docker build -t prasad890/multi_server ./server
+  - docker build -t prasad890/multi_worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push stephengrider/multi-client
-  - docker push stephengrider/multi-nginx
-  - docker push stephengrider/multi-server
-  - docker push stephengrider/multi-worker
+  - docker push prasad890/multi_client
+  - docker push prasad890/multi_nginx
+  - docker push prasad890/multi_server
+  - docker push prasad890/multi_worker
 
 deploy:
   provider: elasticbeanstalk
